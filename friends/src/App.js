@@ -4,13 +4,14 @@ import { Route, Link } from 'react-router-dom'
 import Login from './components/Login'
 import Dashboard from './components/Dashboard'
 import FriendsList from './components/FriendsList';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
     <div className="App">
       <Route exact path="/" component={Dashboard} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/friends" component={FriendsList} />
+      <PrivateRoute exact path="/friends" component={FriendsList} />
       <br />
       <br />
       <Link to='/'>Dashboard</Link>
