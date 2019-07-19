@@ -1,30 +1,70 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { login } from '../actions'
 
-function Login() {
-  return (
-    <form
-    // onSubmit={this.handleSubmit}
-    >
-       
-        <input type="text" name="username" placeholder="Username"
-        // value={username} onChange={this.handleChange}
-        /><br />
-        <input type="password" name="password" placeholder="Password"
-        // value={password} onChange={this.handleChange}
-        /><br />
+class Login extends React.Component {
+	constructor() {
+		super()
+		this.state = {
+			username: '',
+			password: '',
+		}
+	}
 
-        <button type="submit">Login</button>
+	handleChange = (evt) => {
+		evt.preventDefault()
 
-        <br />
-        <br />
-        <br />
-        <Link to='/'>Home</Link>
-        <br />
-        <Link to='/login'>Login</Link>
+		this.setState({
+			[evt.target.name]: evt.target.value,
+		})
+	}
 
-    </form>
-);
+	handleSubmit = (evt) => {
+		evt.preventDefault()
+
+		const { username, password } = this.state
+
+		this.props.login(username, password)
+			.then(() => {
+				this.props.history.push("/friends")
+			})
+			.catch((err) => {
+				console.error(err)
+			})
+	}
+
+	render() {
+		const { username, password } = this.state
+		const { isLoading, errorMessage } = this.props
+
+		return (
+			<form onSubmit={this.handleSubmit}>
+				{errorMessage && <p className="error">{errorMessage}</p>}
+				
+				<input type="text" name="username" placeholder="Username" value={username} onChange={this.handleChange} /><br />
+				<input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange} /><br />
+
+				{isLoading
+					? <p>Logging in...</p>
+                    : <button type="submit">Login</button>}
+			</form>
+		)
+	}
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+	isLoading: state.isLoading,
+	errorMessage: state.errorMessage,
+})
+
+const mapDispatchToProps = {
+	login,
+}
+
+export default withRouter(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps,
+	)(Login)
+)

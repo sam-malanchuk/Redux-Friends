@@ -7,7 +7,22 @@ import {
 
 // state initial values
 const initialState = {
-    friends: [],
+	isLoading: false,
+	errorMessage: null,
+    friends: [
+        {
+            id: 1,
+            name: 'Temp Friend 1',
+            age: 30,
+            email: 'TempFriend1@lambdaschool.com'
+          },
+          {
+            id: 2,
+            name: 'Temp Friend 2',
+            age: 45,
+            email: 'TempFriend2@lambdaschool.com'
+          },        
+    ],
 }
 
 export default function(state = initialState, action) {

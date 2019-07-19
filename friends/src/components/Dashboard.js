@@ -1,15 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 
 function Dashboard() {
   return (
-    <div className="App">
-      App here
-      <br />
-      <br />
-        <Link to='/'>Home</Link>
-        <br />
-        <Link to='/login'>Login</Link>
+    <div>
+        <h3>Dashboard page</h3>
     </div>
   );
 }
