@@ -26,3 +26,16 @@ export function login(username, password) {
 			})
 	}
 }
+
+export function getFriends() {
+    return (dispatch) => {
+        dispatch({ type: API_CONNECT_START })
+        axios.get('http://localhost:5000/api/friends')
+            .then((res) => {
+                dispatch({ type: API_CONNECT_SUCCESS, payload: res.data })
+            })
+            .catch((err) => {
+                dispatch({ type: API_CONNECT_FAILED, payload: err.response.data })
+            })
+    }
+}

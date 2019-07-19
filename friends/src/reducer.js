@@ -2,7 +2,10 @@
 import {
 	LOGGING_IN,
 	LOGIN_SUCCESS,
-	LOGIN_FAILED,
+    LOGIN_FAILED,
+    API_CONNECT_START,
+    API_CONNECT_SUCCESS,
+    API_CONNECT_FAILED,
 } from './actions'
 
 // state initial values
@@ -47,7 +50,28 @@ export default function(state = initialState, action) {
 				isLoading: false,
 				errorMessage: action.payload.message,
 			}
-		}
+        }
+        case API_CONNECT_START: {
+            return {
+              ...state,
+              fetching: true,
+            }
+          }
+          case API_CONNECT_SUCCESS: {
+            const newData = action.payload
+            return {
+              ...state,
+              fetching: false,
+              characters: newData,
+            }
+          }
+          case API_CONNECT_FAILED: {
+            return {
+              ...state,
+              fetching: false,
+              errorMessage: action.payload.message,
+            }
+          }
         default:
             return state
     }

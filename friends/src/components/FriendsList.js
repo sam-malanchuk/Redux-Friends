@@ -1,29 +1,39 @@
 import React from 'react';
+// import connect to see the props
 import { connect } from 'react-redux'
+// import actions to use them
+import { getFriends } from '../actions'
 
-function FriendsList(props) {
-    const {
-		isLoading,
-		errorMessage,
-		friends,
-	} = props
+class FriendsList extends React.Component {
+    componentDidMount() {
+        // call our action
+        this.props.getFriends()
+    }
+    
+    render() {
+        const {
+            isLoading,
+            errorMessage,
+            friends,
+        } = this.props
+    
+        if (isLoading) {
+            return <p>Loading friends...</p>
+        }
 
-    if (isLoading) {
-		return <p>Loading friends...</p>
-	}
-
-    return (
-        <section>
-            <h2>FriendsList here</h2>
-            {errorMessage && <p>{errorMessage}</p>}
-            
-            <ul>
-                {friends.map((friend) => {
-                    return <li key={friend.id}>{friend.name} - {friend.age} - {friend.email}</li>
-                })}
-            </ul>
-        </section>
-    );
+        return (
+            <section>
+                <h2>FriendsList here</h2>
+                {errorMessage && <p>{errorMessage}</p>}
+                
+                <ul>
+                    {friends.map((friend) => {
+                        return <li key={friend.id}>{friend.name} - {friend.age} - {friend.email}</li>
+                    })}
+                </ul>
+            </section>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
@@ -34,4 +44,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps)(FriendsList);
+export default connect(mapStateToProps, { getFriends })(FriendsList);
