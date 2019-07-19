@@ -17,7 +17,7 @@ export function login(username, password) {
 
 		return axios.post('http://localhost:5000/api/login', { username, password })
 			.then((res) => {
-				localStorage.setItem('token', res.data.token)
+				localStorage.setItem('token', res.data.payload)
 				dispatch({ type: LOGIN_SUCCESS })
 			})
 			.catch((err) => {
@@ -30,7 +30,12 @@ export function login(username, password) {
 export function getFriends() {
     return (dispatch) => {
         dispatch({ type: API_CONNECT_START })
-        axios.get('http://localhost:5000/api/friends')
+
+        const headers = {
+            Authorization: localStorage.getItem('token'),
+        }
+
+        axios.get('http://localhost:5000/api/friends', { headers })
             .then((res) => {
                 dispatch({ type: API_CONNECT_SUCCESS, payload: res.data })
             })

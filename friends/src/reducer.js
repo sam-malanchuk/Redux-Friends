@@ -12,20 +12,7 @@ import {
 const initialState = {
 	isLoading: false,
 	errorMessage: null,
-    friends: [
-        {
-            id: 1,
-            name: 'Temp Friend 1',
-            age: 30,
-            email: 'TempFriend1@lambdaschool.com'
-          },
-          {
-            id: 2,
-            name: 'Temp Friend 2',
-            age: 45,
-            email: 'TempFriend2@lambdaschool.com'
-          },        
-    ],
+    friends: [],
 }
 
 export default function(state = initialState, action) {
@@ -54,21 +41,21 @@ export default function(state = initialState, action) {
         case API_CONNECT_START: {
             return {
               ...state,
-              fetching: true,
+              isLoading: true,
             }
           }
           case API_CONNECT_SUCCESS: {
             const newData = action.payload
             return {
               ...state,
-              fetching: false,
-              characters: newData,
+              isLoading: false,
+              friends: newData,
             }
           }
           case API_CONNECT_FAILED: {
             return {
               ...state,
-              fetching: false,
+              isLoading: false,
               errorMessage: action.payload.message,
             }
           }
