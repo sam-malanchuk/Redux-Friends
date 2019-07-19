@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 function Dashboard() {
   return (
@@ -6,9 +7,9 @@ function Dashboard() {
       App here
       <br />
       <br />
-      <a href="/">Home</a>
-      <br />
-      <a href="/login">Login</a>
+        <Link to='/'>Home</Link>
+        <br />
+        <Link to='/login'>Login</Link>
     </div>
   );
 }

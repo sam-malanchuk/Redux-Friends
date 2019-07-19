@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 function Login() {
   return (
@@ -14,6 +15,14 @@ function Login() {
         /><br />
 
         <button type="submit">Login</button>
+
+        <br />
+        <br />
+        <br />
+        <Link to='/'>Home</Link>
+        <br />
+        <Link to='/login'>Login</Link>
+
     </form>
 );
 }
