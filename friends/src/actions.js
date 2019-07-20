@@ -50,18 +50,17 @@ export function getFriends() {
     }
 }
 
-export function addFriend() {
+export function addFriend(payload) {
     return (dispatch) => {
         dispatch({ type: ADD_CONNECT })
 
         const headers = {
             Authorization: localStorage.getItem('token'),
         }
-
-        const tempPayload = { name: 'Sam', age: 20, email: "example@example.com" }
-
-        axios.post('http://localhost:5000/api/friends', { headers, tempPayload })
+        console.log('log out of addfriend', headers)
+        axios.post('http://localhost:5000/api/friends', payload, { headers })
             .then((res) => {
+                console.log('added and returned', res.data)
                 dispatch({ type: ADD_SUCCESS, payload: res.data })
             })
             .catch((err) => {

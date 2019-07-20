@@ -42,8 +42,8 @@ class Login extends React.Component {
 			<form onSubmit={this.handleSubmit}>
 				{errorMessage && <p className="error">{errorMessage}</p>}
 				
-				<input type="text" name="username" placeholder="Username" value={username} onChange={this.handleChange} /><br />
-				<input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange} /><br />
+				<input type="text" name="username" placeholder="Username" value={username} onChange={this.handleChange} /> (user)<br />
+				<input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange} /> (pass)<br />
 
 				{isLoading
 					? <p>Logging in...</p>

@@ -11,6 +11,12 @@ class Dashboard extends React.Component {
 		this.props.history.push('/login')
 	}
 
+    addFriend = (evt) => {
+		evt.preventDefault()
+
+		this.props.history.push('/add')
+	}
+
     render() {
 		return (
         <div>
