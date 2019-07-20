@@ -5,6 +5,7 @@ import Login from './components/Login'
 import Dashboard from './components/Dashboard'
 import FriendsList from './components/FriendsList';
 import ProtectedRoute from './components/ProtectedRoute';
+import AddFriend from './components/AddFriend';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route exact path="/" component={Dashboard} />
       <Route exact path="/login" component={Login} />
       <ProtectedRoute exact path="/friends" component={FriendsList} />
+      <ProtectedRoute exact path="/add" component={AddFriend} />
       <br />
       <br />
       <Link to='/'>Dashboard</Link>

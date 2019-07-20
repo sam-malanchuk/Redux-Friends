@@ -16,7 +16,9 @@ class Dashboard extends React.Component {
         <div>
             <h3>Dashboard page</h3>
             { // show logout button only when logged in
-                this.token && <button type="button" onClick={this.logout}>Logout</button>}
+                this.token && <div><button type="button" onClick={this.addFriend}>Add friend</button><button type="button" onClick={this.logout}>Logout</button></div>}
+            { // show logout button only when logged in
+                (!this.token) && <p>Please login first</p>}
         </div>
         );
     }

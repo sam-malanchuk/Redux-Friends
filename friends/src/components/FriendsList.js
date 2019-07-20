@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 // import actions to use them
 import { getFriends } from '../actions'
+// import ability to add link
+import { Link } from 'react-router-dom'
 
 class FriendsList extends React.Component {
     componentDidMount() {
@@ -30,6 +32,7 @@ class FriendsList extends React.Component {
                     {friends.map((friend) => {
                         return <li key={friend.id}>{friend.name} - {friend.age} - {friend.email}</li>
                     })}
+                    <Link to="/add"><li>Add a friend...</li></Link>
                 </ul>
             </section>
         );
