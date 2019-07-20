@@ -10,6 +10,11 @@ export const LOGGING_IN = 'LOGGING_IN'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILED = 'LOGIN_FAILED'
 
+export const ADD_CONNECT = 'ADD_CONNECT'
+export const ADD_SUCCESS = 'ADD_SUCCESS'
+export const ADD_FAILED = 'ADD_FAILED'
+
+
 // action creators
 export function login(username, password) {
 	return (dispatch) => {
@@ -41,6 +46,26 @@ export function getFriends() {
             })
             .catch((err) => {
                 dispatch({ type: API_CONNECT_FAILED, payload: err.response.data })
+            })
+    }
+}
+
+export function addFriend() {
+    return (dispatch) => {
+        dispatch({ type: ADD_CONNECT })
+
+        const headers = {
+            Authorization: localStorage.getItem('token'),
+        }
+
+        const tempPayload = { name: 'Sam', age: 20, email: "example@example.com" }
+
+        axios.post('http://localhost:5000/api/friends', { headers, tempPayload })
+            .then((res) => {
+                dispatch({ type: ADD_SUCCESS, payload: res.data })
+            })
+            .catch((err) => {
+                dispatch({ type: ADD_FAILED, payload: err.response.data })
             })
     }
 }
